@@ -4,7 +4,10 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
-import About from './components/About'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import axios from 'axios'
+
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -21,15 +24,14 @@ const App = () => {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/tasks')
-    const data = await res.json()
-
-    return data
+    const res = await axios.get('/api/tasks');
+    const data = res.data;
+    return data;
   }
 
   // Fetch Task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await axios.get(`/api/tasks/${id}`)
     const data = await res.json()
 
     return data
@@ -37,13 +39,11 @@ const App = () => {
 
   // Add Task
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
-      method: 'POST',
+    const res = await axios.post('/api/tasks', task, {
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(task),
-    })
+    });
 
     const data = await res.json()
 
@@ -56,9 +56,8 @@ const App = () => {
 
   // Delete Task
   const deleteTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE',
-    })
+    const res = await axios.delete(`/api/tasks/${id}`);
+
     //We should control the response status to decide if we will change the state or not.
     res.status === 200
       ? setTasks(tasks.filter((task) => task.id !== id))
@@ -70,7 +69,7 @@ const App = () => {
     const taskToToggle = await fetchTask(id)
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`/api/tasks/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
@@ -113,6 +112,7 @@ const App = () => {
             }
           />
           <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
         </Routes>
         <Footer />
       </div>

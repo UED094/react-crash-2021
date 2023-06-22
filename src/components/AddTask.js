@@ -18,6 +18,7 @@ const AddTask = ({ onAdd }) => {
     setText('')
     setDay('')
     setReminder(false)
+    alert('New Task added')
   }
 
   return (

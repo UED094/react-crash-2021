@@ -11,6 +11,30 @@
       "text": "Meeting at School",
       "day": "Feb 6th at 1:30pm",
       "reminder": true
+    },
+    {
+      "text": "Teach Chris how to use bootstrap with react",
+      "day": "June 20 9 pm",
+      "reminder": true,
+      "id": 3
+    },
+    {
+      "text": "Updated via postman task",
+      "day": "Die another day",
+      "reminder": false,
+      "id": 4
+    },
+    {
+      "text": "asdasd",
+      "day": "asdasda",
+      "reminder": true,
+      "id": 5
+    },
+    {
+      "text": "New task",
+      "day": "Test time",
+      "reminder": false,
+      "id": 6
     }
   ]
 }
